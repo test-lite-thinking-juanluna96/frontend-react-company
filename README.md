@@ -1,12 +1,12 @@
-serverless-react-boilerplate
+frontend-react-company
 ============================
 
 [![serverless](http://public.serverless.com/badges/v3.svg)](http://www.serverless.com)
 [![license](https://img.shields.io/npm/l/serverless-dynamodb-local.svg)](https://opensource.org/licenses/MIT)
 [![Join the chat at https://gitter.im/99xt/serverless-react-boilerplate](https://badges.gitter.im/99xt/serverless-react-boilerplate.svg)](https://gitter.im/99xt/serverless-react-boilerplate?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-## Sample Todo App
-<img width="964" alt="screen shot 2017-08-29 at 4 49 58 am" src="https://user-images.githubusercontent.com/2338919/29805880-e14eb17c-8ca9-11e7-9b3d-a171238e880c.png">
+## Company front end app
+
 
 ## Requirements
 * Java Runtime Engine (JRE) version 6.x or newer to run dynamodb locally.
@@ -148,25 +148,3 @@ On the root level package.json file add that bucket name and your AWS profile na
 See following vidoes for a step by step guide to create a s3 bucket and configure static web hosting.
 #### [Video 01 - Hosting a website on AWS with S3, CloudFront and Route53 ](https://youtu.be/D6qB7MEFOe0)
 #### [Video 02 - Hosting Angular, React and Vue.js applications on AWS](https://youtu.be/f20XOaQ3JDA)
-
-## Contribution
-Your contributions are much appriciated. 
-
-## Release Log
-* Release v4.1.0 - Updated boilerplate to support Lambda Proxy
-* Release v4.0.0 - Added support for serverless@1.x 
-* Release v3.0.0 - Added environment variables for database table names &  Feature to deploy in multiple APIGateway service level stages.
-* Release v2.2.0 - Added foundation css framework for the react client
-* Release v2.1.1 - Improvements in react web app
-* Release v2.0.1 - Dynamodb local table creation bug fix
-* Release v2.0.0 - Added support for serverless v1.0 and Issues #24 #25
-* Release v1.0.3 - Fixed local dynamobd get packaged for deployment
-* Release v1.0.2 - Added support for serverless@1.0.0-rc.2
-
-## Links
-* [serverless-dynamodb-local plugin](https://github.com/99xt/serverless-dynamodb-local)
-* [serverless-offline plugin](https://github.com/dherault/serverless-offline)
-
-
-## License
-  [MIT](LICENSE)

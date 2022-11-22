@@ -1,18 +1,38 @@
-import React, { Component } from "react";
+import { createTheme, ThemeProvider } from "@mui/material/styles";
+import React from "react";
+import { Provider } from "react-redux";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import TodoComponent from "./components/todo-component";
-import PageNotFound from "./components/page-not-found";
+import { PersistGate } from "redux-persist/integration/react";
 import "./App.css";
+import PageNotFound from "./components/page-not-found";
+import { persist, store } from "./redux/store";
+import { Companies, Login, Register } from "./routes";
+import PrivateRoute from './routes/PrivateRoute';
 
-export default class App extends Component {
-  render() {
-    return (
-      <Router>
-        <Switch>
-          <Route exact path="/" component={TodoComponent} />
-          <Route component={PageNotFound} />
-        </Switch>
-      </Router>
-    );
-  }
+export default function App() {
+  const theme = createTheme({
+    palette: {
+      primary: {
+        main: "#FFC300",
+      },
+    },
+  });
+
+  return (
+    <Provider store={store}>
+      <PersistGate persistor={persist}>
+        <ThemeProvider theme={theme}>
+          <Router>
+            <Switch>
+              <Route exact path="/" component={Login} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/register" component={Register} />
+              <PrivateRoute exact path="/companies" component={Companies} />
+              <Route component={PageNotFound} />
+            </Switch>
+          </Router>
+        </ThemeProvider>
+      </PersistGate>
+    </Provider>
+  );
 }

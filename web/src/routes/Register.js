@@ -1,10 +1,13 @@
 import { Button, Checkbox, FormControlLabel, TextField } from "@mui/material";
 import { useFormik } from "formik";
 import React, { useState } from "react";
+import { useDispatch } from 'react-redux';
 import { registerFields, registerSchema } from "../common/schemas/register.validation";
 import UserLayout from "../components/layouts/users/UserLayout";
+import { registerUsersAction } from "../redux/actions/users.action";
 
 function Register() {
+  const dispatch = useDispatch();
   const [registerForm, setRegisterForm] = useState({
     email: "",
     password: "",
@@ -16,8 +19,7 @@ function Register() {
     initialValues: registerForm,
     validationSchema: registerSchema,
     onSubmit: (values) => {
-        console.log("values", values);
-      alert(JSON.stringify(values, null, 2));
+      dispatch(registerUsersAction(values));
     },
   });
 

@@ -3,7 +3,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import PageNotFound from "./components/page-not-found";
-import { Login, Register } from "./routes";
+import { Companies, Login, Register } from "./routes";
 
 
 export default function App() {
@@ -22,6 +22,7 @@ export default function App() {
         <Switch>
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Register} />
+          <Route exact path="/companies" component={Companies} />
           <Route component={PageNotFound} />
         </Switch>
       </Router>

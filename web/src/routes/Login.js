@@ -9,6 +9,8 @@ import { loginUsersAction } from './../redux/actions/users.action';
 function Login() {
   const dispatch = useDispatch();
   const error = useSelector((state) => state.user.error);
+  const user = useSelector((state) => state.user.user);
+  console.log(user);
 
   const [loginForm, setLoginForm] = useState({
     email: "",

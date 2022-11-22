@@ -1,18 +1,17 @@
-import React, { Component } from "react";
+import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import TodoComponent from "./components/todo-component";
-import PageNotFound from "./components/page-not-found";
 import "./App.css";
+import PageNotFound from "./components/page-not-found";
+import { Login, Register } from "./routes";
 
-export default class App extends Component {
-  render() {
+export default function App() {
     return (
       <Router>
         <Switch>
-          <Route exact path="/" component={TodoComponent} />
+          <Route exact path="/login" component={Login} />
+          <Route exact path="/register" component={Register} />
           <Route component={PageNotFound} />
         </Switch>
       </Router>
     );
-  }
 }

@@ -1,23 +1,24 @@
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme, ThemeProvider } from "@mui/material/styles";
 import React from "react";
+import { Provider } from 'react-redux';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import "./App.css";
 import PageNotFound from "./components/page-not-found";
+import { store } from './redux/store';
 import { Companies, Login, Register } from "./routes";
-
 
 export default function App() {
   const theme = createTheme({
     palette: {
       primary: {
-        main: '#FFC300',
+        main: "#FFC300",
       },
     },
   });
-  
 
-    return (
-      <ThemeProvider theme={theme}>
+  return (
+    <Provider store={store}>
+    <ThemeProvider theme={theme}>
       <Router>
         <Switch>
           <Route exact path="/login" component={Login} />
@@ -26,6 +27,7 @@ export default function App() {
           <Route component={PageNotFound} />
         </Switch>
       </Router>
-      </ThemeProvider>
-    );
+    </ThemeProvider>
+    </Provider>
+  );
 }

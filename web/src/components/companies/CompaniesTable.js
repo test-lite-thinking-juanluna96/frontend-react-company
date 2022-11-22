@@ -1,45 +1,39 @@
 import MaterialTable from "material-table";
-import React from "react";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import IconsTable from './../../common/icons/IconsTable';
-
-const empList = [
-  {
-    id: 1,
-    name: "Neeraj",
-    email: "neeraj@gmail.com",
-    phone: 9876543210,
-    age: 23,
-  },
-  { id: 2, name: "Raj", email: "raj@gmail.com", phone: 6678901234, age: 17 },
-  {
-    id: 3,
-    name: "David",
-    email: "david342@gmail.com",
-    phone: 6312345678,
-    age: 34,
-  },
-  {
-    id: 4,
-    name: "Vikas",
-    email: "vikas75@gmail.com",
-    phone: 9787654321,
-    age: 20,
-  },
-];
+import { createCompanyAction, deleteCompanyAction, getCompaniesAction, updateCompanyAction } from './../../redux/actions/companies.action';
 
 const columns = [
   { title: "Name", field: "name" },
-  { title: "Address", field: "email" },
-  { title: "NIT", field: "phone" },
-  { title: "Phone", field: "age" },
+  { title: "Address", field: "address" },
+  { title: "NIT", field: "nit" },
+  { title: "Phone", field: "phone" },
 ];
 
 function CompaniesTable() {
-  const [empData, setEmpData] = React.useState(empList);
+  const [empData, setEmpData] = React.useState([]);
+  const companies = useSelector((state) => state.company.companies);
+  console.log(empData);
+  const dispatch = useDispatch();
+
+  const loadCompanies = () => {
+    dispatch(getCompaniesAction())
+  };
+
+  useEffect(() => {
+    loadCompanies();
+  }, []);
+
+  useEffect(() => {
+    const editable = companies.map(o => ({ ...o }));
+    setEmpData(editable);
+  }, [companies]);
+  
 
   return (
     <>
-        <MaterialTable
+    <MaterialTable
           title="Companies list"
           data={empData}
           columns={columns}
@@ -51,39 +45,30 @@ function CompaniesTable() {
           }}
           editable={{
             onRowAdd: (newData) =>
-                new Promise((resolve) => {
-                    setTimeout(() => {
-                        resolve();
-                        setEmpData([...empData, newData]);
-                    }, 600);
-                }),
+              new Promise((resolve, reject) => {
+                setTimeout(() => {
+                  dispatch(createCompanyAction(newData));
+                  resolve();
+                }, 1000);
+              }),
             onRowUpdate: (newData, oldData) =>
-                new Promise((resolve) => {
-                    setTimeout(() => {
-                        resolve();
-                        if (oldData) {
-                            setEmpData((prev) =>
-                                prev.map((item) =>
-                                    item.id === oldData.id ? newData : item
-                                )
-                            );
-                        }
-                    }, 600);
-                }
-                ),
+              new Promise((resolve, reject) => {
+                setTimeout(() => {
+                  dispatch(updateCompanyAction(newData));
+                  resolve();
+                }, 1000);
+              }),
             onRowDelete: (oldData) =>
-                new Promise((resolve) => {
-                    setTimeout(() => {
-                        resolve();
-                        setEmpData((prev) =>
-                            prev.filter((item) => item.id !== oldData.id)
-                        );
-                    }, 600);
-                }
-                ),
-            }}
+              new Promise((resolve, reject) => {
+                setTimeout(() => {
+                  dispatch(deleteCompanyAction(oldData.id));
+                  resolve();
+                }, 1000);
+              }),
+          }}
           icons={IconsTable()}
         />
+        
     </>
   );
 }

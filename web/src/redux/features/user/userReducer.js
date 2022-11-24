@@ -49,7 +49,7 @@ const callbackReducer = (builder) => {
         ...state,
         token: action.payload.token,
         isAuthenticated: true,
-        isAdmin: action.payload.isAdmin,
+        isAdmin: action.payload.admin,
         user: {
           id: action.payload.id,
           email: action.payload.email,

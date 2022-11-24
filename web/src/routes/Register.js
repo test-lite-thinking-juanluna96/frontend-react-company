@@ -1,12 +1,12 @@
 import { Button, Checkbox, FormControlLabel, TextField } from "@mui/material";
 import { useFormik } from "formik";
 import React, { useState } from "react";
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { registerFields, registerSchema } from "../common/schemas/register.validation";
 import UserLayout from "../components/layouts/users/UserLayout";
 import { registerUsersAction } from "../redux/actions/users.action";
 
-function Register() {
+function Register({ history }) {
   const dispatch = useDispatch();
   const [registerForm, setRegisterForm] = useState({
     email: "",
@@ -14,12 +14,16 @@ function Register() {
     confirmPassword: "",
     admin: false,
   });
+  const isAdmin = useSelector((state) => state.user.isAdmin);
 
   const formik = useFormik({
     initialValues: registerForm,
     validationSchema: registerSchema,
     onSubmit: (values) => {
       dispatch(registerUsersAction(values));
+      if (isAdmin) {
+        history.push("/companies");
+      }
     },
   });
 

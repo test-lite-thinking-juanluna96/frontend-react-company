@@ -19,7 +19,8 @@ const columns = [
 function CompaniesTable() {
   const [empData, setEmpData] = React.useState([]);
   const companies = useSelector((state) => state.company.companies);
-  const admin = useSelector((state) => state.user.admin);
+  const isAdmin = useSelector((state) => state.user.isAdmin);
+
   const dispatch = useDispatch();
 
   const loadCompanies = () => {
@@ -51,7 +52,7 @@ function CompaniesTable() {
           onRowAdd: (newData) =>
             new Promise((resolve, reject) => {
               setTimeout(() => {
-                if (admin) {
+                if(isAdmin) {
                   dispatch(createCompanyAction(newData));
                 }
                 resolve();
@@ -60,7 +61,7 @@ function CompaniesTable() {
           onRowUpdate: (newData, oldData) =>
             new Promise((resolve, reject) => {
               setTimeout(() => {
-                if (admin) {
+                if(isAdmin) {
                   dispatch(updateCompanyAction(newData));
                 }
                 resolve();
@@ -69,7 +70,7 @@ function CompaniesTable() {
           onRowDelete: (oldData) =>
             new Promise((resolve, reject) => {
               setTimeout(() => {
-                if (admin) {
+                if(isAdmin) {
                   dispatch(deleteCompanyAction(oldData.id));
                 }
                 resolve();

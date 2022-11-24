@@ -6,11 +6,10 @@ import { loginFields, loginSchema } from "../common/schemas/login.validation";
 import UserLayout from "../components/layouts/users/UserLayout";
 import { loginUsersAction } from './../redux/actions/users.action';
 
-function Login() {
+function Login({ history }) {
   const dispatch = useDispatch();
   const error = useSelector((state) => state.user.error);
-  const user = useSelector((state) => state.user.user);
-  console.log(user);
+  const isAuthenticated = useSelector((state) => state.user.isAuthenticated);
 
   const [loginForm, setLoginForm] = useState({
     email: "",
@@ -22,6 +21,9 @@ function Login() {
     validationSchema: loginSchema,
     onSubmit: (values) => {
       dispatch(loginUsersAction(values));
+      if (isAuthenticated) {
+        history.push("/companies");
+      }
     },
   });
 
